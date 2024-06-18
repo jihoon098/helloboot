@@ -1,8 +1,9 @@
 package hoonspring.helloboot;
 
-public class HelloService {
+public class HelloService implements HelloServiceInf {
 	
-	String sayHello(String name) {
+	@Override
+	public String sayHello(String name) {
 		return "Hello " + name;
 	}
 

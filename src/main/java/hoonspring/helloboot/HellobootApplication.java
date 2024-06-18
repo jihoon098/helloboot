@@ -29,8 +29,12 @@ public class HellobootApplication {
 		 * 
 		 */
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
-		// 스프링은 클래스의 메타 정보를 등록(register)하는 방식으로 Bean을 생성.
+		/* 
+		 * 스프링은 클래스의 메타 정보를 등록(register)하는 방식으로 Bean을 생성.
+		 * Assembler(= 스프링 컨테이너)는 런타임에 Bean 객체를 생성하며 동시에 의존관계를 맺어줌.
+		 */
 		applicationContext.registerBean(HelloController.class);
+		applicationContext.registerBean(HelloService.class);
 		// 구성된 정보를 이용해 컨테이너를 초기화.
 		applicationContext.refresh();
 		
