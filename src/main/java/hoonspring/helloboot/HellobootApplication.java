@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,22 @@ import jakarta.servlet.http.HttpServletResponse;
 public class HellobootApplication {
 
 	public static void main(String[] args) {
+		
+		/*
+		 * 스프링 컨테이너 생성 & Bean 등록
+		 * ★ Application Context : 스프링 컨테이너를 대표하는 인터페이스 이름
+		 * 
+		 * GenericApplicationContext
+		 * : applicationContext(즉, 스프링 컨테이너)를 코드로 이용할 수 있도록 만들어진 클래스
+		 * 
+		 */
+		GenericApplicationContext applicationContext = new GenericApplicationContext();
+		// 스프링은 클래스의 메타 정보를 등록(register)하는 방식으로 Bean을 생성.
+		applicationContext.registerBean(HelloController.class);
+		// 구성된 정보를 이용해 컨테이너를 초기화.
+		applicationContext.refresh();
+		
+		
 		/* ServletWebServerFactory
 		 * : 서블릿 컨테이너의 종류에 종속되지 않도록 추상화한 인터페이스
 		 *  
@@ -28,8 +45,6 @@ public class HellobootApplication {
 		
 		// 웹서버 생성
 		WebServer webServer = serverFactory.getWebServer(servletContext -> {
-			
-			HelloController helloController = new HelloController();
 			
 			// 생성한 서블릿 컨테이너에 서블릿을 추가
 			servletContext.addServlet("Front Controller", new HttpServlet() {
@@ -53,11 +68,11 @@ public class HellobootApplication {
 						 * 평범한 데이터타입으로 전환하여 비지니스를 처리하는 Object에게 파라미터를 바인딩해줌.
 						 * 기존 컨트롤러는 직접적인 웹요청과 분리됨. 
 						 */
+						HelloController helloController = applicationContext.getBean(HelloController.class);
 						String ret = helloController.hello(name);
 						
-						// 응답 Object 처리
-						resp.setStatus(HttpStatus.OK.value());
-						resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+						// 응답 Object 처리. Status를 set하지 않아도 서블릿 컨테이너는 기본적으로 에러가 나지않는 한 200번 상태코드 리턴.
+						resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
 						resp.getWriter().println(ret);
 					}
 					else if (req.getRequestURI().equals("/user")) {
