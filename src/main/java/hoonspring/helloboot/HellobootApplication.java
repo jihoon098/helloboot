@@ -3,6 +3,7 @@ package hoonspring.helloboot;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,6 +17,16 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ComponentScan
 public class HellobootApplication {
 	
+	@Bean
+	public ServletWebServerFactory servletWebServerFactory() {
+		return new TomcatServletWebServerFactory();
+	}
+	
+	@Bean
+	public DispatcherServlet dispatcherServlet() {
+		return new DispatcherServlet();
+	}
+	
 	public static void main(String[] args) {
 		
 		/*
@@ -27,13 +38,17 @@ public class HellobootApplication {
 			protected void onRefresh() {
 				super.onRefresh();
 				
-				/* 
-				 * 스프링 컨테이너 초기화를 진행하면서 서블릿 컨테이너도 초기화
-				 *  -> 서블릿 컨테이너 생성 & 서블릿(Dispatcher Servlet) 등록
+				ServletWebServerFactory serverFactory = this.getBean(ServletWebServerFactory.class);
+				DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
+				/*
+				 * DispatcherServlet에는 스프링(ApplicationContext)를 주입해 줘야 하는데, 아래 코드를 지워도 동작함.
+				 * 그 이유는 DispatcherServlet이 ApplicationContextAware이라는 인터페이스를 구현하고 있기 때문.
+				 * 스프링컨테이너는 ApplicationContextAware를 구현하고 있는 클래스에 자기 자신인 애플리케이션 컨텍스트를 주입한다.
 				 */
-				ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+				// dispatcherServlet.setApplicationContext(this);
+				
 				WebServer webServer = serverFactory.getWebServer(servletContext -> {
-					servletContext.addServlet("Dispatcher Servlet", new DispatcherServlet(this)
+					servletContext.addServlet("Dispatcher Servlet", dispatcherServlet
 					
 					).addMapping("/*");
 				});

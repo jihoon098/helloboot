@@ -2,6 +2,7 @@ package hoonspring.helloboot;
 
 import java.util.Objects;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 	// final은 정의할 때부터 초기화 or 생성자에서 초기화 코드가 필요
 	private final HelloServiceInf helloServiceInf;
+	private final ApplicationContext applicationContext;
 	
-	public HelloController(HelloServiceInf helloServiceInf) {
+	/*
+	 * applicationContext 타입의 오브젝트 또한 SpringContainer입장에서는 자신이 관리하는 Bean 오브젝트.
+	 * 그래서 아래와 같이 생성자의 파라미터를 통해 DI 받을 수 있는 것.
+	 */
+	public HelloController(HelloServiceInf helloServiceInf, ApplicationContext applicationContext) {
 		this.helloServiceInf = helloServiceInf;
+		this.applicationContext = applicationContext;
+		
+		System.out.println("★ Bean객체에서 ApplicationContext 오브젝트 주입받기 : " + applicationContext);
 	}
 	
 	@GetMapping("/hello")
