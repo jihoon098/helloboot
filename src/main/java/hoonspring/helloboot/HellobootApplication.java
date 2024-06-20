@@ -3,36 +3,18 @@ package hoonspring.helloboot;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /*
- * @Configuration
- * : 해당 클래스가 스프링의 구성(Config)정보를 가진 클래스라는 것을 스프링에 알려줌.
- * 	 @Configuration이 붙은 클래스는 전체 애플리케이션(즉, Spring Container)를 어떻게 구성할 것인가? 라는 중요한 정보를 가지고 있는 클래스.
- * 	 따라서 애플리케이션 컨텍스트(스프링 컨테이너)에 가장 처음 등록된다.
+ * 컴포넌트 스캔 -> @ComponentScan
+ * : @Component라는 Annotation이 붙은 모든 클래스를 찾아서 빈으로 등록해주는 역할. 이때 DI도 발생한다.
  */
 @Configuration
+@ComponentScan
 public class HellobootApplication {
-	
-	/*
-	 * Factory Method 란?
-	 * : 단순히 어떤 오브젝트를 생성하는 로직을 담은 Method를 의미
-	 * 	 해당 메소드에서 객체 생성 및 의존관계 주입을 다 해주면 됨.
-	 * 
-	 * @Bean
-	 * : Config 클래스내에 해당 어노테이션으로도 스프링에 Bean객체 등록이 가능하다.
-	 */
-	@Bean
-	public HelloController helloControllere(HelloServiceInf helloServiceInf) { //이렇게 파라미터로 넣으면 스프링이 의존 오브젝트를 알아서 넘겨준다.
-		return new HelloController(helloServiceInf);
-	}
-	@Bean
-	public HelloServiceInf helloServiceInf() {
-		return new HelloService();
-	}
 	
 	public static void main(String[] args) {
 		
