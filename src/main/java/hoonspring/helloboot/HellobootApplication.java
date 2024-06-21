@@ -1,5 +1,6 @@
 package hoonspring.helloboot;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +27,7 @@ public class HellobootApplication {
 	}
 	
 	public static void main(String[] args) {
-		// 핵심 포인트: 파라미터로 주입하는 클래스는 '스프링 컨테이너의 구성정보를 가진 클래스'여야 한다.
-		MySpringApplication.run(HellobootApplication.class, args);
+		SpringApplication.run(HellobootApplication.class, args);
 	}
 	
 	
