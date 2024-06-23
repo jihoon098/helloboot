@@ -1,8 +1,5 @@
 package hoonspring.helloboot;
 
-import java.util.Objects;
-
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,27 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 	// final은 정의할 때부터 초기화 or 생성자에서 초기화 코드가 필요
 	private final HelloServiceInf helloServiceInf;
-	private final ApplicationContext applicationContext;
 	
 	/*
 	 * applicationContext 타입의 오브젝트 또한 SpringContainer입장에서는 자신이 관리하는 Bean 오브젝트.
 	 * 그래서 아래와 같이 생성자의 파라미터를 통해 DI 받을 수 있는 것.
 	 */
-	public HelloController(HelloServiceInf helloServiceInf, ApplicationContext applicationContext) {
+	public HelloController(HelloServiceInf helloServiceInf) {
 		this.helloServiceInf = helloServiceInf;
-		this.applicationContext = applicationContext;
-		
-		System.out.println("★ Bean객체에서 ApplicationContext 오브젝트 주입받기 : " + applicationContext);
 	}
 	
 	@GetMapping("/hello")
 	public String hello(@RequestParam("name") String name) {
 		
-		/*
-		 * Objects.requireNonNull <- Null 체크를 위한 메소드
-		 * 파라미터로 입력된 값이 null 이라면 NPE(NullPointerException)가 발생
-		 * not null 이면 입력값을 그대로 반환함
-		 */
-		return helloServiceInf.sayHello(Objects.requireNonNull(name));
+		if(name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException();
+		}
+		return helloServiceInf.sayHello(name);
 	}
 }
