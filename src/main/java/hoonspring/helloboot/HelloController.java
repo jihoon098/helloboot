@@ -18,8 +18,8 @@ public class HelloController {
 	private final HelloServiceInf helloServiceInf;
 	
 	/*
-	 * applicationContext 타입의 오브젝트 또한 SpringContainer입장에서는 자신이 관리하는 Bean 오브젝트.
-	 * 그래서 아래와 같이 생성자의 파라미터를 통해 DI 받을 수 있는 것.
+	 * HelloServiceInf 에 어떤 구현체를 넣으라고 명시한 것은 없으나,
+	 * 스프링 컨테이너는 현재 컨테이너에 등록된 빈 오브젝트 중에서 주입 후보가 단일로 있다면 자동으로 연결해 줌. Autowiring이라고 부름.
 	 */
 	public HelloController(HelloServiceInf helloServiceInf) {
 		this.helloServiceInf = helloServiceInf;

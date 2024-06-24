@@ -30,6 +30,6 @@ public class HelloApiTest {
 		// 2. header(content-type) text/plain
 		Assertions.assertThat(res.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
 		// 3. body 내용
-		Assertions.assertThat(res.getBody()).isEqualTo("Hello Spring");
+		Assertions.assertThat(res.getBody()).isEqualTo("*Hello Spring*");
 	}
 }
