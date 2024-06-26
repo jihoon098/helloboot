@@ -2,6 +2,8 @@ package hoonspring.helloboot;
 
 import org.springframework.boot.SpringApplication;
 
+import hoonspring.config.MySpringBootApplication;
+
 @MySpringBootApplication
 public class HellobootApplication {
 	
