@@ -1,2 +1,3 @@
 hoonspring.config.autoconfig.TomcatWebServerConfig
+hoonspring.config.autoconfig.JettyWebServerConfig
 hoonspring.config.autoconfig.DispatcherServletConfig
