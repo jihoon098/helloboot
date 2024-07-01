@@ -16,11 +16,7 @@ repositories {
 }
 
 dependencies {
-	// Tomcat 라이브러리는 상위 모듈인 starter-web 에 포함되어있기 때문에 제외시켜줘야 함.
-	implementation('org.springframework.boot:spring-boot-starter-web') {
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-	}
-	implementation 'org.springframework.boot:spring-boot-starter-jetty'
+	implementation('org.springframework.boot:spring-boot-starter-web')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
