@@ -1,3 +1,4 @@
+hoonspring.config.autoconfig.ServerPropertiesConfig
 hoonspring.config.autoconfig.PropertyPlaceHolderConfig
 hoonspring.config.autoconfig.TomcatWebServerConfig
 hoonspring.config.autoconfig.JettyWebServerConfig

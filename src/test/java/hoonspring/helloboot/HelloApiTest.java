@@ -20,7 +20,7 @@ public class HelloApiTest {
 		 */
 		TestRestTemplate rest = new TestRestTemplate();
 		// ResponseEntity : 웹응답의 모든 요소를 다 가지고 있는 오브젝트. 그리고 <String>은 body가 String이라는 의미.
-		ResponseEntity<String> res = rest.getForEntity("http://localhost:8080/app/hello?name={name}", String.class, "Spring");
+		ResponseEntity<String> res = rest.getForEntity("http://localhost:9090/app/hello?name={name}", String.class, "Spring");
 
 		// Assertion 검증 라이브러리 사용
 		// 웹응답 3가지 요소 검증
