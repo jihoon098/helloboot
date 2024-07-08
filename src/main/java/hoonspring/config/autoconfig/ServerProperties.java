@@ -1,5 +1,8 @@
 package hoonspring.config.autoconfig;
 
+import hoonspring.config.MyConfigurationProperties;
+
+@MyConfigurationProperties
 public class ServerProperties {
 	
 	private String contextPath;
