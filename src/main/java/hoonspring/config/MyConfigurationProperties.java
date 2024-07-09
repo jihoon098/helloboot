@@ -11,5 +11,6 @@ import org.springframework.stereotype.Component;
 @Target(ElementType.TYPE)
 @Component
 public @interface MyConfigurationProperties {
-
+	
+	String prefix();
 }

@@ -1,5 +1,7 @@
 package hoonspring.config.autoconfig;
 
+import java.util.Map;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.context.properties.bind.Binder;
@@ -37,8 +39,12 @@ public class PropertyPostProcessorConfig {
 				MyConfigurationProperties annotation = AnnotationUtils.findAnnotation(bean.getClass(), MyConfigurationProperties.class);
 				if (annotation == null) return bean;
 				
-				// bindOrCreate() : 바인딩을 시도했는데 없다면, 그냥 이 클래스의 Bean을 만들어서 Return.
-				return Binder.get(environment).bindOrCreate("", bean.getClass());
+				// Annotation의 모든 Elements(Attributes)를 Key, value 형태인 Map으로 get
+				Map<String, Object> attrs = AnnotationUtils.getAnnotationAttributes(annotation);
+				String prefix = (String) attrs.get("prefix");
+				
+				// 바인딩할때 propertySource에서 prefix를 확인하고 뒤의 이름이 클래스의 멤버변수명과 일치하는가 체크.
+				return Binder.get(environment).bindOrCreate(prefix, bean.getClass());
 			}
 		};
 	}
