@@ -33,4 +33,13 @@ public class HelloController {
 		}
 		return helloServiceInf.sayHello(name);
 	}
+	
+	
+	@GetMapping("/count")
+	public String count(@RequestParam("count") String count) {
+		
+		return "count" + helloServiceInf.countOf(count);
+	}
+	
+	
 }

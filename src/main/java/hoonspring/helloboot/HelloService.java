@@ -22,5 +22,9 @@ public class HelloService implements HelloServiceInf {
 		
 		return "Hello " + name;
 	}
-
+	
+	@Override
+	public int countOf(String count) {
+		return helloRepository.countOf(count);
+	}
 }
