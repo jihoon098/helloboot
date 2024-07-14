@@ -9,8 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloService implements HelloServiceInf {
 	
+	private final HelloRepository helloRepository;
+	
+	public HelloService(HelloRepository helloRepository) {
+		this.helloRepository = helloRepository;
+	}
+	
+	
 	@Override
 	public String sayHello(String name) {
+		this.helloRepository.increaseCount(name);
+		
 		return "Hello " + name;
 	}
 
