@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @TestPropertySource
  * : 테스트용으로 사용할 프로퍼티 정보를 읽어오도록 classpath를 설정.
  */
+/*
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @ExtendWith(SpringExtension.class)
@@ -32,5 +33,5 @@ import org.springframework.transaction.annotation.Transactional;
 @TestPropertySource("classpath:/application.properties")
 @Transactional
 public @interface BootApplicationTest {
-
 }
+*/

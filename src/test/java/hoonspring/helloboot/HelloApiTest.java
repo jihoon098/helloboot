@@ -2,12 +2,22 @@ package hoonspring.helloboot;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+/*
+ * @SpringBootTest
+ * : 스프링부트 테스트 환경을 설정하는 어노테이션. 작성한 모든 빈들을 컨테이너로 로딩한다.
+ * 
+ * WebEnvironment.DEFINED_PORT 옵션
+ * : 웹서버를 Properties에 정의한 포트를 이용해서 실행하고 테스트 수행.
+ */
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class HelloApiTest {
 	
 	// 서버를 띄운 이후에 Api 요청 Test 진행

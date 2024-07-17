@@ -1,6 +1,0 @@
-hoonspring.config.autoconfig.DataSourceConfig
-hoonspring.config.autoconfig.PropertyPostProcessorConfig
-hoonspring.config.autoconfig.PropertyPlaceHolderConfig
-hoonspring.config.autoconfig.TomcatWebServerConfig
-hoonspring.config.autoconfig.JettyWebServerConfig
-hoonspring.config.autoconfig.DispatcherServletConfig
